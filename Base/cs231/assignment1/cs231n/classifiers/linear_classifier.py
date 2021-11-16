@@ -5,7 +5,7 @@ from builtins import object
 import numpy as np
 from ..classifiers.linear_svm import *
 from ..classifiers.softmax import *
-from past.builtins import xrange
+
 
 
 class LinearClassifier(object):
@@ -66,8 +66,10 @@ class LinearClassifier(object):
             #########################################################################
             # *****START OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
 
-            pass
-
+            batch_index = np.random.choice(num_train, batch_size, replace=True)
+            X_batch = X[batch_index]
+            y_batch = y[batch_index]
+            
             # *****END OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
 
             # evaluate loss and gradient
@@ -81,7 +83,7 @@ class LinearClassifier(object):
             #########################################################################
             # *****START OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
 
-            pass
+            self.W -= learning_rate * grad
 
             # *****END OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
 
@@ -111,7 +113,7 @@ class LinearClassifier(object):
         ###########################################################################
         # *****START OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
 
-        pass
+        y_pred = X.dot(self.W).argmax(axis=1)
 
         # *****END OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
         return y_pred

@@ -1,4 +1,6 @@
 .ipynb_checkpoints
 .jpg
 Images
-.csv
+*.csv
+__pycache__
+cifar-10-batches-py

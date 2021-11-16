@@ -1,8 +1,6 @@
 from builtins import range
 import numpy as np
 from random import shuffle
-from past.builtins import xrange
-
 
 def softmax_loss_naive(W, X, y, reg):
     """
@@ -34,8 +32,21 @@ def softmax_loss_naive(W, X, y, reg):
     #############################################################################
     # *****START OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
 
-    pass
-
+    num_classes = W.shape[1]
+    num_train = X.shape[0]
+    loss = 0.0
+    for i in range(num_train):
+        f = X[i].dot(W)
+        f -= np.max(f)
+        loss += np.log(np.sum(np.exp(f))) - f[y[i]]
+        dW[:, y[i]] -= X[i]
+        for j in range(num_classes):
+            dW[:,j] += X[i] * np.exp(f[j]) / np.sum(np.exp(f))
+            
+    loss /= num_train
+    dW /= num_train
+    loss += reg * np.sum(W*W)
+    dW += 2 * reg * W
     # *****END OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
 
     return loss, dW
@@ -59,8 +70,16 @@ def softmax_loss_vectorized(W, X, y, reg):
     #############################################################################
     # *****START OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
 
-    pass
-
+    num_classes = W.shape[1]
+    num_train = X.shape[0]
+    f = X.dot(W)
+    f -= f.max(axis=1).reshape((num_train, 1))
+    loss = np.sum(np.log(np.sum(np.exp(f), axis=1)) - f[range(num_train), y])
+    loss = loss / num_train + reg * np.sum(W*W)
+    counts = np.exp(f) / np.sum(np.exp(f), axis=1).reshape(num_train, 1)
+    counts[range(num_train), y] -= 1
+    dW = np.dot(X.T, counts)
+    dW = dW / num_train + 2 * reg * W
     # *****END OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
 
     return loss, dW
