@@ -50,7 +50,17 @@ d = np.ones_like(shape, int) # d.shape (2,)
 * ones, zeros, empty -> shape 크기의 배열 생성 (1, 0, 빈 배열)
 * some_like -> input으로 넣은 배열의 shape와 같은 배열을 생성
 
-4. np.arange()
+4. np.arange(start, end, step)
+```python
+np.arange(0, 5, 0.5)
+# array([0., 0.5, 1., ... 4.5])
+```
+* python 의 range와 비슷하게 동작, 배열을 생성
+
+5. np.identity(n), np.eye(shape, k=0), np.diag(ndarray)
+* np.identity : n 크기의 단위행렬을 생성
+* np.eye(shape, k=0) : shape 모양을 가지고 k번째 행부터 대각선이 1인 행렬을 생성
+* np.diag(ndarray) : 대각행렬의 값을 추출
 
 ### 2.2 array 기초함수
 1. ndarray.reshape(shape)
@@ -67,4 +77,22 @@ a = np.array(vector,int).reshape(-1)
 * ndarray.reshape(-1)과 같은 기능을 한다.
 
 
-### 2.3 array indexing
+### 2.3 array index
+1. ndarray index
+* ndarray에서는 array index를 다음과 같이 쓴다
+```python
+vector = [[1, 3, 5],[2, 4, 8]]
+a = np.array(vector)
+# a[1, 2] -> 8
+```
+2. ndarray slicing
+
+```python
+vector = [[1, 3, 5],[2, 4, 8]]
+a = np.array(vector)
+a[1, 1:2] # [[1, 3]]
+a[:, 1:-1] # [[3, 5],[4, 8]]
+a[:, ::2] # [[1, 5],[2, 8]]
+```
+* ndarray에서는 행과 열 부분을 나눠서 slicing이 가능
+* range 함수와 비슷하게 step 지정도 가능
