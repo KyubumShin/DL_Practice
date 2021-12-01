@@ -118,3 +118,6 @@ a = np.arange(10)
 np.where(a < 5)
 # (array([0, 1, 2, 3, 4], dtype=int64),)
 ```
+
+5. np.isfinite, np.isnan
+* 발산하지 않은 값을 찾는 함수, nan 값을 찾는 함수
