@@ -4,3 +4,4 @@ Images
 *.csv
 __pycache__
 cifar-10-batches-py
+.idea
