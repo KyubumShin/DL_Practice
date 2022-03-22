@@ -6,6 +6,7 @@ labels: ''
 assignees: ''
 
 ---
+
 **버그 종류**
 A clear and concise description of what the problem is. Ex. I'm always frustrated when [...]
 
